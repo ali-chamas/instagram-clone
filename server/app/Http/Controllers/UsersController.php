@@ -45,4 +45,16 @@ class UsersController extends Controller
         
     return response()->json(['status' => 'success', 'message' => 'Profile updated successfully']);
     }
+
+    public function deleteUser(){
+        $user = Auth::user();
+        if(!$user){
+            return response()->json(['status'=> 'failed','message'=> 'not authenticated']);
+        }
+        else{
+
+            $user->delete();
+            return response()->json(['status'=> 'success','message' => 'User deleted successfully']);
+        }
+    }
 }
