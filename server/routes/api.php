@@ -42,6 +42,7 @@ Route::controller(LikesController::class)->group(function () {
 Route::controller(CommentsController::class)->group(function () {
     Route::post('add-comment/{post_id}','addComment');
     Route::get('get-comments/{post_id}','getComments');
+    Route::delete('delete-comment/{post_id}/{comment_id}','deleteComment');
 });
 
 Route::controller(UsersController::class)->group(function () {

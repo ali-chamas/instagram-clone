@@ -6,11 +6,12 @@ use App\Models\Image;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
     public function getPosts()
     {
-        $posts = Post::all();
+        $posts = Post::with('images')->get();
         return response()->json($posts);
     }
     public function getPostsByUserId($userId)
@@ -22,19 +23,25 @@ class PostsController extends Controller
     public function createPost(Request $request){
         $request->validate([
             'caption'=>'required|string',
-            'user_id'=> 'required|integer',
             'images'=> 'required|array',
-            'images.*' => 'required|url',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $post=Post::create([
             'caption'=>$request->caption,
-            'user_id'=>$request->user_id,
+            'user_id'=>Auth::user()->id,
         ]);
 
-        foreach ($request->images as $imageUrl) {
+        foreach ($request->images as $imageFile) {
+          
+                
+                $extension = $imageFile->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $imageFile->move(public_path('/post_images'), $filename);
+                
+            
             Image::create([
                 'post_id' => $post->id,
-                'image' => $imageUrl,
+                'image' => $filename,
             ]);
         }
         return response()->json(['message' => 'Post created successfully', 'post' => $post]);

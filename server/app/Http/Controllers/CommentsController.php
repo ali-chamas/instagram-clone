@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
@@ -19,7 +21,8 @@ class CommentsController extends Controller
             "comment"=> "required|string",
         ]);
 
-        $post->comments()->attach($user->id, ['comment' => $request->comment]);
+        $post->comments()->attach($user->id, ['comment' => $request->comment, 'created_at' => Carbon::now(), // 
+        'updated_at' => Carbon::now(), ]);
         return response()->json(['status'=>'success','message'=>'added a new comment']);
     }
     public function getComments($post_id){
@@ -30,5 +33,14 @@ class CommentsController extends Controller
         
 
         return response()->json(['status'=>'success','comments'=>$comments]);
+    }
+
+    public function deleteComment($post_id,$comment_id){
+        $post=Post::find($post_id);
+
+        $post->comments()->detach($comment_id);
+        DB::table('comments')->where('id',$comment_id)->delete();
+        
+        return response()->json(['status'=> 'success','message'=> 'comment deleted']);
     }
 }
