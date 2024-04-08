@@ -6,11 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -64,16 +65,19 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function Post(){
+    public function posts(){
         return $this->hasMany(Post::class);
     }
-    public function Like(){
-        return $this->hasMany(Like::class);
+    public function likes(){
+        return $this->belongsToMany(Post::class, 'likes', 'user_id','post_id');
     }
-    public function Comment(){
-        return $this->hasMany(Comment::class);
+    public function comments(){
+        return $this->belongsToMany(Post::class, 'comments', 'user_id','post_id')->withPivot('comment');
     }
-    public function Follower(){
+    public function followers(){
         return $this->hasMany(Follower::class);
     }
+    // JWT
+   
+    
 }

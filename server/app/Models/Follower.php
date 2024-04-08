@@ -28,7 +28,7 @@ class Follower extends Model
     ];
 
 
-    public function User(){
+    public function users(){
         return $this->belongsToMany(User::class);
     }
     

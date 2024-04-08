@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use App\Models\Post;
 class PostsController extends Controller
 {
     public function getPosts()
     {
-        $posts = Post::with('images','likes','comments')->get();
+        $posts = Post::all();
         return response()->json($posts);
     }
     public function getPostsByUserId($userId)
     {
-        $posts = Post::where('user_id', $userId)::with('images','likes','comments')->get();
+        $posts = Post::where('user_id', $userId)->with('images','likes','comments')->get();
         return response()->json($posts);
     } 
 
@@ -38,4 +39,6 @@ class PostsController extends Controller
         }
         return response()->json(['message' => 'Post created successfully', 'post' => $post]);
     }
+
+   
 }

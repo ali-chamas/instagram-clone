@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\UsersController;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -28,4 +31,19 @@ Route::controller(PostsController::class)->group(function () {
     Route::post('create-post','createPost');
     Route::get('get-posts','getPosts');
     Route::get('get-posts/{user_id}','getPostsByUserId');
+    
+});
+
+Route::controller(LikesController::class)->group(function () {
+    Route::post('like-post/{post_id}','toggleLikePost');
+    Route::get('get-likes/{post_id}','getLikes');
+});
+
+Route::controller(CommentsController::class)->group(function () {
+    Route::post('add-comment/{post_id}','addComment');
+    Route::get('get-comments/{post_id}','getComments');
+});
+
+Route::controller(UsersController::class)->group(function () {
+    Route::post('update-profile','updateUser');
 });

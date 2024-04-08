@@ -28,10 +28,10 @@ class Comment extends Model
     ];
 
 
-    public function User(){
+    public function users(){
         return $this->belongsTo(User::class);
     }
-    public function Post(){
+    public function posts(){
         return $this->belongsTo(Post::class);
     }
     
