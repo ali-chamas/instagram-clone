@@ -16,7 +16,7 @@ class PostsController extends Controller
     }
     public function getPostsByUserId($userId)
     {
-        $posts = Post::where('user_id', $userId)->with('images','likes','comments')->get();
+        $posts = Post::where('user_id', $userId)->with('images')->get();
         return response()->json($posts);
     } 
 
