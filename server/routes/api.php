@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\UsersController;
@@ -49,4 +50,12 @@ Route::controller(CommentsController::class)->group(function () {
 Route::controller(UsersController::class)->group(function () {
     Route::post('update-profile','updateUser');
     Route::delete('delete-user}','deleteUser');
+});
+
+Route::controller(FollowController::class)->group(function () {
+    Route::post('send-request','sendFollowRequest');
+    Route::get('accept-request/{req_id}','acceptFollowRequest');
+    Route::delete('cancel-follow/{req_id}','cancelFollow');
+    Route::get('get-follow','getFollow');
+    Route::get('get-requests','getFollowRequests');
 });

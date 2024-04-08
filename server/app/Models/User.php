@@ -75,7 +75,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Post::class, 'comments', 'user_id','post_id')->withPivot('comment');
     }
     public function followers(){
-        return $this->hasMany(Follower::class);
+        return $this->hasMany(Follower::class,'follower_id');
+    }
+    public function followings()
+    {
+        return $this->hasMany(Follower::class, 'following_id');
     }
     // JWT
    
