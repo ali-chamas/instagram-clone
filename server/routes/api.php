@@ -31,6 +31,7 @@ Route::controller(PostsController::class)->group(function () {
     Route::post('create-post','createPost');
     Route::get('get-posts','getPosts');
     Route::get('get-posts/{user_id}','getPostsByUserId');
+    Route::delete('delete-post/{post_id}','deletePost');
     
 });
 

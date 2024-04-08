@@ -47,15 +47,15 @@ class PostsController extends Controller
         return response()->json(['message' => 'Post created successfully', 'post' => $post]);
     }
 
-    public function deletePost(){
-        $user = Auth::user();
-        if(!$user){
-            return response()->json(['status'=> 'failed','message'=> 'not authenticated']);
+    public function deletePost($post_id){
+       $post = Post::find($post_id);
+        if(!$post){
+            return response()->json(['status'=> 'failed','message'=> 'post not found']);
         }
         else{
 
-            $user->delete();
-            return response()->json(['status'=> 'success','message' => 'User deleted successfully']);
+            $post->delete();
+            return response()->json(['status'=> 'success','message' => 'Post deleted successfully']);
         }
     }
 
