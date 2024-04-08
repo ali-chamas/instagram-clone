@@ -39,16 +39,18 @@ class FollowController extends Controller
     public function getFollow(){
         $user=Auth::user();
 
-        $follow = $user->followers()->where('followers.isAccepted',true)->where('followers.follower_id',$user->id)->orWhere('followers.following_id',$user->id)->get();
+        $followers = Follower::with('follower')->where('following_id',$user->id)->where('isAccepted',true)->get();
 
-        return response()->json(['success'=>"success",'followings'=>$follow]);
+        $followings = Follower::with('following')->where('follower_id',$user->id)->where('isAccepted',true)->get();
+
+        return response()->json(['success'=>"success",'followers'=>$followers,'followings'=>$followings]);
     }
     public function getFollowRequests(){
         $user=Auth::user();
 
-        $follow = $user->followers()->where('followers.isAccepted',false)->where('followers.following_id',$user->id)->get();
+        $request = Follower::with('follower')->where('following_id',$user->id)->where('isAccepted',false)->get();
 
-        return response()->json(['success'=>"success",'followings'=>$follow]);
+        return response()->json(['success'=>"success",'requests'=>$request]);
     }
 
 
