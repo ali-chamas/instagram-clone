@@ -47,4 +47,5 @@ Route::controller(CommentsController::class)->group(function () {
 
 Route::controller(UsersController::class)->group(function () {
     Route::post('update-profile','updateUser');
+    Route::delete('delete-user}','deleteUser');
 });

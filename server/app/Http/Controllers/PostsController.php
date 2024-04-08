@@ -31,11 +31,11 @@ class PostsController extends Controller
             'user_id'=>Auth::user()->id,
         ]);
 
-        foreach ($request->images as $imageFile) {
+        foreach ($request->images as $index =>  $imageFile) {
           
                 
                 $extension = $imageFile->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
+                $filename = time() . $index.'.' . $extension;
                 $imageFile->move(public_path('/post_images'), $filename);
                 
             
@@ -45,6 +45,18 @@ class PostsController extends Controller
             ]);
         }
         return response()->json(['message' => 'Post created successfully', 'post' => $post]);
+    }
+
+    public function deletePost(){
+        $user = Auth::user();
+        if(!$user){
+            return response()->json(['status'=> 'failed','message'=> 'not authenticated']);
+        }
+        else{
+
+            $user->delete();
+            return response()->json(['status'=> 'success','message' => 'User deleted successfully']);
+        }
     }
 
    

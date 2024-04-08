@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create("posts", function (Blueprint $table) {
             $table->id();
             $table->string("caption");
-            $table->integer("nbr_likes")->default(0);
-            $table->integer("nbr_comments")->default(0);
+          
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

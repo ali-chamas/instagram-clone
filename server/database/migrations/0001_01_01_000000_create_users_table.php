@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->string('bio')->nullable();
-            $table->integer('nbr_followers')->default(0);
-            $table->integer('nbr_followings')->default(0);
+            
             $table->rememberToken();
             $table->timestamps();
         });
