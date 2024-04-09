@@ -34,9 +34,9 @@ class Post extends Model
         'is_liked_by_user'
     ];
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
     public function likes(){
         return $this->belongsToMany(User::class, 'likes', 'post_id','user_id');
     }

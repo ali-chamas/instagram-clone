@@ -12,7 +12,7 @@ class PostsController extends Controller
     public function getPosts()
     {
         $user = Auth::user();
-        $followings_id = $user->follower()->pluck('following_id');
+        $followings_id = $user->follower()->where('followers.isAccepted',true)->pluck('following_id');
 
         if(count($followings_id) > 0){
             $posts = Post::whereIn('user_id', $followings_id)

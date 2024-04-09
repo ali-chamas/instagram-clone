@@ -53,6 +53,14 @@ class FollowController extends Controller
         return response()->json(['success'=>"success",'requests'=>$request]);
     }
 
+    public function getFollowRecommendations(){
+        $user=Auth::user();
+        $recommendations=[];
+
+        $followers = Follower::where('follower_id'->$user->id);
+        
+    }
+
 
     
 

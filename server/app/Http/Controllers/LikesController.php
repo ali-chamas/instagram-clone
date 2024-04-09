@@ -16,20 +16,15 @@ class LikesController extends Controller
             $user = Auth::user();
             $post = Post::find($post_id);
         
-            $post->likes()->toggle($user->id);
+            $toggleLike= $post->likes()->toggle($user->id);
 
-            if ($post->likes->contains($user->id)){
-                
-                $message = 'Post liked successfully';
+            if(empty($toggleLike['attached'])){
+                $message='liked post succesfully';
+            }else{
+                $message='unliked post succesfully';
             }
-            else{
-                
-                $message = 'Post unliked successfully';
-            }
-            return response()->json([
-                'status' => 'success',
-                'message' => $message,
-            ]);
+            
+            return response()->json(['status' => 'success','message' => $message ]);
         }
 
         public function getLikes($post_id){
