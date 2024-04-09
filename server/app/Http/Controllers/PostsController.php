@@ -11,8 +11,18 @@ class PostsController extends Controller
 {
     public function getPosts()
     {
-        $posts = Post::with('images')->get();
-        return response()->json($posts);
+        $user = Auth::user();
+        $followings_id = $user->follower()->pluck('following_id');
+
+        if(count($followings_id) > 0){
+            $posts = Post::whereIn('user_id', $followings_id)
+            ->with('user')
+            ->with('images')
+            ->get();
+            return response()->json(['status'=>'success','posts'=>$posts]);
+        }
+
+        return response()->json(['status'=>'failed']);
     }
     public function getPostsByUserId($userId)
     {

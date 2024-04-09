@@ -22,10 +22,10 @@ Route::get('/hello',function(){
 
 Route::controller(AuthController::class)->group(function () {
 
-Route::post('register','register');
-Route::post('login','login');
-Route::get('logout','logout');
-Route::get('refresh','refresh');
+    Route::post('register','register');
+    Route::post('login','login');
+    Route::get('logout','logout');
+    Route::get('refresh','refresh');
 });
 
 Route::controller(PostsController::class)->group(function () {
@@ -50,6 +50,7 @@ Route::controller(CommentsController::class)->group(function () {
 Route::controller(UsersController::class)->group(function () {
     Route::post('update-profile','updateUser');
     Route::delete('delete-user}','deleteUser');
+    Route::get('get-user/{user_id}','getUser');
 });
 
 Route::controller(FollowController::class)->group(function () {

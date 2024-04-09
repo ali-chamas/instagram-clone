@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,5 +57,10 @@ class UsersController extends Controller
             $user->delete();
             return response()->json(['status'=> 'success','message' => 'User deleted successfully']);
         }
+    }
+
+    public function getUser($user_id){
+        $user = User::with('post')->where('id',$user_id)->get();
+        return response()->json(['status'=> 'success','user'=> $user]);
     }
 }
