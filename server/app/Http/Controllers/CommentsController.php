@@ -28,10 +28,9 @@ class CommentsController extends Controller
     public function getComments($post_id){
         $post=Post::find($post_id);
 
-        $comments =$post->comments()->select('users.name','users.username','users.image')->get();
+        $comments =$post->comments()->select('users.name','users.username','users.image','comments.comment')->get();
 
         
-
         return response()->json(['status'=>'success','comments'=>$comments]);
     }
 

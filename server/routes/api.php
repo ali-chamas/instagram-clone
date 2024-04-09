@@ -49,7 +49,7 @@ Route::controller(CommentsController::class)->group(function () {
 
 Route::controller(UsersController::class)->group(function () {
     Route::post('update-profile','updateUser');
-    Route::delete('delete-user}','deleteUser');
+    Route::post('delete-user','deleteUser');
     Route::get('get-user/{user_id}','getUser');
 });
 
