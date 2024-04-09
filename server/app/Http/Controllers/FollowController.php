@@ -54,10 +54,45 @@ class FollowController extends Controller
     }
 
     public function getFollowRecommendations(){
+        
         $user=Auth::user();
-        $recommendations=[];
+        $recommendations=null;
 
-        $followers = Follower::where('follower_id'->$user->id);
+        $followers = Follower::where('follower_id',$user->id)->where('isAccepted',true)->get();
+
+
+        $random_number=null;
+        $previous_number=null;
+
+        foreach($followers as $index => $follower){
+
+  
+            if($index <2){
+                if(count($followers) ==1){
+                    $random_number=1;
+                }else{
+
+                    $random_number=mt_rand(0,count($followers));
+                }
+
+                if($random_number == $previous_number){
+                    $index-=1;
+                    
+                }else{
+                    $previous_number=$random_number;
+                    $recommendations=Follower::where('follower_id',$followers[$random_number-1]->following_id)->where('isAccepted',true)->with('following')->get();
+                }
+            }
+                
+        }
+        if($recommendations){
+            $message=$recommendations;
+        }else{
+            $message="Follow users to get recommendations";
+        }
+
+
+        return response()->json(['success'=> 'success','recommendations'=>$message]);
         
     }
 

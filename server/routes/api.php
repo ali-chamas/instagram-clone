@@ -59,4 +59,5 @@ Route::controller(FollowController::class)->group(function () {
     Route::delete('cancel-follow/{req_id}','cancelFollow');
     Route::get('get-follow','getFollow');
     Route::get('get-requests','getFollowRequests');
+    Route::get('get-recommendations','getFollowRecommendations');
 });

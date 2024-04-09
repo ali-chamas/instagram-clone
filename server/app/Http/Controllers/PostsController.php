@@ -21,7 +21,7 @@ class PostsController extends Controller
             ->get();
             return response()->json(['status'=>'success','posts'=>$posts]);
         }
-
+        
         return response()->json(['status'=>'failed']);
     }
     public function getPostsByUserId($userId)
