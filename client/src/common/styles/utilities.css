@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  scroll-behavior: smooth;
+}
+.btn-style {
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.font-larger {
+  font-size: 18px;
+}
+
+.btn-style:hover {
+  opacity: 0.85;
+}
+
+.shadow:hover {
+  box-shadow: 0px 1px 3px 2px gainsboro;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+.big-gap {
+  gap: 25px;
+}
+.self-center {
+  align-self: center;
+}
+.w-full {
+  width: 100%;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-end {
+  align-items: end;
+}
+.align-center {
+  align-items: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.gap {
+  gap: 15px;
+}
+.small-gap {
+  gap: 5px;
+}
+
+.h1-size {
+  font-size: 65px;
+}
+
+.h-full {
+  height: 100vh;
+}
+
+.p {
+  padding: 20px;
+}
+.small-p {
+  padding: 5px;
+}
+
+.border-radius {
+  border-radius: 10px;
+}
+
+.text-mg-right {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.mg-top {
+  margin-top: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.text-align {
+  text-align: center;
+}
+
+.large-font {
+  font-size: 35px;
+}
+
+.medium-font {
+  font-size: 19px;
+}
+
+.letter-spacing {
+  letter-spacing: 2px;
+}
+
+.input-style {
+  border-radius: 30px;
+  border: 1px solid gray;
+  padding: 0 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.input {
+  background-color: rgb(49, 45, 45);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  outline: none;
+  color: white;
+}
+.input::placeholder {
+  color: rgb(177, 172, 172);
+}
+
+.popup {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(4, 4, 4, 0.649);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.popup-child {
+  padding: 20px;
+  width: 600px;
+  max-height: 500px;
+  overflow: auto;
+  position: relative;
+}
+
+.popup-child input[type="text"] {
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid lightgray;
+  outline: none;
+  max-width: 500px;
+}
+
+.popup-child input[type="number"] {
+  padding: 10px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid lightgray;
+  max-width: 500px;
+}
+
+.popup-child input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.popup-child input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.popup-child input[type="number"]::placeholder {
+  color: white;
+}
+
+.popup-child textarea {
+  padding: 10px;
+  border-radius: 7px;
+  /* border: 1px solid lightgray; */
+  outline: none;
+  max-width: 460px;
+}
+.popup-child textarea::placeholder {
+  color: white;
+}
+
+.popup-child label {
+  margin-right: 9px;
+}
+
+.popup-child h1 {
+  top: 0;
+}
+
+.popup-child .exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  text-align: center;
+  width: 40px;
+}
+
+.popup-child .add {
+  position: absolute;
+  top: 6%;
+  right: 0;
+  margin: 15px;
+  width: 40px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.popup-child .add:hover {
+  opacity: 70%;
+}
+
+.popup-child .add-rev {
+  text-align: center;
+  font-size: 15px;
+  width: 100px;
+  height: auto;
+}
+
+.popup-child .add-rev:hover {
+  opacity: 70%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.special-font {
+  font-family: "Caveat Brush", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cairo-text {
+  font-family: "Cairo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+@media (max-width: 768px) {
+  .h1-size {
+    font-size: 40px;
+  }
+  .large-font {
+    font-size: 28px;
+  }
+  .popup-child {
+    padding: 40px;
+    max-width: 300px;
+    width: 300px;
+  }
+  .popup-child input[type="text"] {
+    max-width: 260px;
+  }
+  .popup-child textarea {
+    max-width: 260px;
+  }
+}

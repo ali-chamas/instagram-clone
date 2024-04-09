@@ -1,0 +1,12 @@
+.text-blue {
+  color: rgb(59, 157, 255);
+}
+.bg-blue {
+  background-color: rgb(59, 157, 255);
+}
+.text-white {
+  color: white;
+}
+.text-danger {
+  color: rgb(129, 7, 7);
+}
