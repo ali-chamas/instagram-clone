@@ -66,6 +66,7 @@ class FollowController extends Controller
 
         foreach($followers as $index => $follower){
 
+            
   
             if($index <2){
                 if(count($followers) ==1){
