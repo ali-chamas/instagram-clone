@@ -28,3 +28,17 @@
 .login-btn {
   padding: 15px 0;
 }
+
+@media (max-width: 1040px) {
+  .login-section > img {
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .form-container {
+    width: 300px;
+  }
+  .form-container img {
+    width: 280px;
+  }
+}
