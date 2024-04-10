@@ -40,6 +40,11 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
     ];
+    protected $appends=[
+        'total followers',
+        'total followings'
+    ];
+
 
     /**
      * Get the attributes that should be cast.
@@ -82,6 +87,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Follower::class, 'following_id');
     }
   
-   
-    
+   public function getTotalFollowersAttribute(){
+    return $this->following()->count();
+   }
+   public function getTotalFollowingsAttribute(){
+    return $this->follower()->count();
+   }
 }
