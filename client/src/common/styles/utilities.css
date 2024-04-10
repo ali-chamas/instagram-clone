@@ -266,6 +266,10 @@ input[type="number"]::-webkit-outer-spin-button {
   font-variation-settings: "slnt" 0;
 }
 
+.border {
+  border: 1px solid white;
+}
+
 @media (max-width: 768px) {
   .h1-size {
     font-size: 40px;

@@ -1,13 +1,16 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useState } from "react";
 import { sendRequest } from "../request-method/request";
 
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-
+  const [user, setUser] = useState();
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+
+  useEffect(() => {
+    if (token) getAuthUser();
+  }, [token]);
 
   const login = async (username_email, password) => {
     const reqBody = {
@@ -20,7 +23,6 @@ const UserContextProvider = ({ children }) => {
       setUser(data.user);
       setToken(data.authorisation.token);
       window.localStorage.setItem("token", data.authorisation.token);
-      console.log(res);
     } catch (error) {
       return error.response.data.message;
     }
@@ -52,9 +54,18 @@ const UserContextProvider = ({ children }) => {
       setUser(data.user);
       setToken(data.authorisation.token);
       window.localStorage.setItem("token", data.authorisation.token);
-      console.log(res);
     } catch (error) {
       return error.response.data.message;
+    }
+  };
+
+  const getAuthUser = async () => {
+    try {
+      const res = await sendRequest("GET", "/get-user");
+      setUser(res.data.user);
+    } catch (error) {
+      setToken(null);
+      window.localStorage.removeItem("token");
     }
   };
 

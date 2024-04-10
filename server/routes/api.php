@@ -51,6 +51,7 @@ Route::controller(UsersController::class)->group(function () {
     Route::post('update-profile','updateUser');
     Route::post('delete-user','deleteUser');
     Route::get('get-user/{user_id}','getUser');
+    Route::get('get-user','loggedInUser');
 });
 
 Route::controller(FollowController::class)->group(function () {

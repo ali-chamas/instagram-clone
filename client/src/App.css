@@ -1,0 +1,8 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.sidebar h3:hover {
+  color: aquamarine;
+}

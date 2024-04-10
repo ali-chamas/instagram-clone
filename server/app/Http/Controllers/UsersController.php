@@ -71,4 +71,11 @@ class UsersController extends Controller
         $user = User::with('post')->where('id',$user_id)->get();
         return response()->json(['status'=> 'success','user'=> $user]);
     }
+
+    public function loggedInUser(){
+        $user = Auth::user();
+        if($user)
+        return response()->json(['user'=>$user],201);
+        else return response()->json(['message'=>'not authotized'],401);
+    }
 }

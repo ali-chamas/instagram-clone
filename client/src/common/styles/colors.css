@@ -10,3 +10,6 @@
 .text-danger {
   color: rgb(129, 7, 7);
 }
+.bg-danger {
+  background-color: rgb(129, 7, 7);
+}
