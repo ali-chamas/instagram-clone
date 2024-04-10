@@ -11,7 +11,7 @@
   width: 450px;
 }
 .form-container > form {
-  height: 500px;
+  min-height: 500px;
 }
 
 .border-gray {
