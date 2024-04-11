@@ -30,8 +30,9 @@ class FollowController extends Controller
         return response()->json(['status'=>'success','message'=>'request accepted']);
     }
     public function cancelFollow($req_id){
-        $follow = Follower::find($req_id);
-        $follow->delete();
+        $user = Auth::user();
+        $follow = Follower::where('follower_id',$user->id)->where('following_id',$req_id)->delete();
+        
        
         return response()->json(['status'=>'success','message'=>'request deleted']);
     }
@@ -73,11 +74,12 @@ class FollowController extends Controller
                     $random_number=1;
                 }else{
 
-                    $random_number=mt_rand(0,count($followers));
+                    $random_number=mt_rand(0,count($followers)-1);
                 }
 
                 if($random_number == $previous_number){
                     $index-=1;
+                    break;
                     
                 }else{
                     $previous_number=$random_number;

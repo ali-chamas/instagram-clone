@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class Follower extends Model
 {
@@ -27,6 +28,7 @@ class Follower extends Model
 
     ];
 
+    
 
     public function follower()
     {
@@ -37,6 +39,7 @@ class Follower extends Model
     {
         return $this->belongsTo(User::class, 'following_id');
     }
+    
     
     
    
