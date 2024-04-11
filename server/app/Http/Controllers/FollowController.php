@@ -64,38 +64,36 @@ class FollowController extends Controller
         $user = Auth::user();
         $recommendations = null;
     
-        // Get all followers of the authenticated user who have accepted the request
+  
         $followers = Follower::where('follower_id', $user->id)
             ->where('isAccepted', true)
-            ->pluck('following_id') // Pluck only the following_id from the followers
-            ->toArray(); // Convert the plucked data to an array
+            ->pluck('following_id') 
+            ->toArray(); 
     
-        // Check if the user has any followers
         if (empty($followers)) {
             $message = "Follow users to get recommendations";
         } else {
-            // Get up to 2 random followers who are not followed back by the authenticated user
+            
             $randomFollowers = Follower::whereNotIn('follower_id', $followers)
-                ->where('following_id', '!=', $user->id) // Exclude the authenticated user
+                ->where('following_id', '!=', $user->id) 
                 ->where('isAccepted', true)
                 ->inRandomOrder()
                 ->take(2)
                 ->get();
     
-            // Check if there are any recommendations
             if ($randomFollowers->isNotEmpty()) {
-                // Get the following IDs of the random followers
+                
                 $followingIds = $randomFollowers->pluck('following_id')->toArray();
     
-                // Get the followings of the random followers
+                
                 $recommendations = Follower::whereIn('follower_id', $followingIds)
                     ->where('isAccepted', true)
                     ->with('following')
                     ->get()
                     ->pluck('following')
-                    ->unique('id'); // Ensure uniqueness based on user ID
+                    ->unique('id'); 
     
-                // Exclude the authenticated user from the recommendations
+                
                 $recommendations = $recommendations->where('id', '!=', $user->id);
             } else {
                 return response()->json(['success' => false, 'message' =>'no followers found' ]);
