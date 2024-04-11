@@ -40,7 +40,7 @@ const SuggestionsBar = () => {
       <div className="flex column gap">
         {loading ? (
           <Loader />
-        ) : suggestions.length > 0 ? (
+        ) : suggestions && suggestions.length > 0 ? (
           suggestions.map((sug, i) => (
             <FollowUserCard
               key={i}

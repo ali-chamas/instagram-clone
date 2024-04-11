@@ -2,7 +2,7 @@ import React from "react";
 import UsersBriefInfo from "./UsersBriefInfo";
 import { sendRequest } from "../../request-method/request";
 
-const FollowUserCard = ({ res, user, setTrigger }) => {
+const FollowUserCard = ({ user, setTrigger }) => {
   const handleFollow = async () => {
     const reqBody = { following_id: user.id };
     try {

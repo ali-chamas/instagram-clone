@@ -1,0 +1,24 @@
+.profile-section .profile-img {
+  width: 150px;
+  border-radius: 50%;
+}
+.profile-section {
+  max-width: 800px;
+}
+
+.user-posts-cointainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  border-top: 1px solid white;
+  padding: 15px;
+  margin-top: 100px;
+}
+
+.user-posts-cointainer .post-image {
+  width: 250px;
+}
+.user-posts-cointainer .post-image:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

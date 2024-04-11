@@ -42,8 +42,8 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
     protected $appends=[
-        'total followers',
-        'total followings',
+        'total_followers',
+        'total_followings',
         'is_followed_by_user',
         'is_requested_by_user'
     ];
@@ -92,10 +92,10 @@ class User extends Authenticatable implements JWTSubject
     }
   
    public function getTotalFollowersAttribute(){
-    return $this->following()->count();
+    return $this->following()->where('isAccepted',true)->count();
    }
    public function getTotalFollowingsAttribute(){
-    return $this->follower()->count();
+    return $this->follower()->where('isAccepted',true)->count();
    }
 
    public function getIsFollowedByUserAttribute(){

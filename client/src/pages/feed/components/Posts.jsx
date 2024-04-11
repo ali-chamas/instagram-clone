@@ -14,14 +14,15 @@ const Posts = () => {
     try {
       const res = await sendRequest("GET", "/get-posts");
       const data = res.data;
+
       setPosts(data.posts);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
   };
 
+  console.log(posts);
   useEffect(() => {
     getPots();
   }, []);
@@ -29,10 +30,10 @@ const Posts = () => {
     <div className="flex column align-center big-gap w-full">
       {loading ? (
         <Loader />
-      ) : !posts.length > 0 ? (
+      ) : posts && !posts.length > 0 ? (
         "no posts from your followings"
       ) : (
-        posts.map((post, i) => <SinglePost key={i} post={post} />)
+        posts && posts.map((post, i) => <SinglePost key={i} post={post} />)
       )}
     </div>
   );
