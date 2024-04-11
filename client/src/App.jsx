@@ -6,7 +6,7 @@ import "./common/styles/colors.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProtection from "./protectedRoutes/AuthProtection";
 import LoginProtection from "./protectedRoutes/LoginProtection";
-
+import Followings from "./pages/followings/page";
 import Feed from "./pages/feed/page";
 import Profile from "./pages/profile/page";
 import Layout from "./common/components/Layout";
@@ -20,6 +20,10 @@ const App = () => {
             <Route
               path="/profile"
               element={<Layout children={<Profile />} />}
+            />
+            <Route
+              path="/followings"
+              element={<Layout children={<Followings />} />}
             />
           </Route>
 
