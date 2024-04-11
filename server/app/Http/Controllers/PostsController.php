@@ -24,10 +24,12 @@ class PostsController extends Controller
         
         return response()->json(['status'=>'failed']);
     }
-    public function getPostsByUserId($userId)
+
+    
+    public function getPost($id)
     {
-        $posts = Post::where('user_id', $userId)->with('images')->get();
-        return response()->json($posts);
+        $post = Post::where('id', $id)->with('user')->with('images')->get();
+        return response()->json(['post'=>$post]);
     } 
 
     public function createPost(Request $request){

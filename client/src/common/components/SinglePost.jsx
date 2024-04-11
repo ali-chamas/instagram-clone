@@ -27,7 +27,7 @@ const SinglePost = ({ post }) => {
     }
   };
   return (
-    <div className="flex column gap single-post p">
+    <div className="flex column gap single-post p bg-primary border-radius">
       <div className="flex justify-between w-full">
         <UsersBriefInfo user={post.user} />
       </div>

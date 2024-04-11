@@ -10,6 +10,8 @@ import Followings from "./pages/followings/page";
 import Feed from "./pages/feed/page";
 import Profile from "./pages/profile/page";
 import Layout from "./common/components/Layout";
+
+import Post from "./pages/single-post/page";
 const App = () => {
   return (
     <div>
@@ -24,6 +26,10 @@ const App = () => {
             <Route
               path="/followings"
               element={<Layout children={<Followings />} />}
+            />
+            <Route
+              path="/post/:post_id"
+              element={<Layout children={<Post />} />}
             />
           </Route>
 
