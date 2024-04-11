@@ -68,7 +68,7 @@ class UsersController extends Controller
     }
 
     public function getUser($user_id){
-        $user = User::with('post')->where('id',$user_id)->get();
+        $user = User::with('post')->where('users.id',$user_id)->get();
         return response()->json(['status'=> 'success','user'=> $user]);
     }
 

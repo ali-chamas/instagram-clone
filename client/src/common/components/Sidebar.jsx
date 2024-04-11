@@ -6,6 +6,7 @@ import { UserContext } from "../../context/userContext";
 import profileImage from "../../assets/profile.png";
 import { useNavigate } from "react-router-dom";
 import { IoPeopleSharp } from "react-icons/io5";
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const { user, logout } = useContext(UserContext);
@@ -15,7 +16,6 @@ const Sidebar = () => {
     navigate("/login");
   };
 
-  console.log(user);
   return (
     <div className="flex column justify-between h-full sidebar p">
       <div className="flex column gap">
