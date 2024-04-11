@@ -18,7 +18,7 @@ const App = () => {
           <Route element={<AuthProtection />}>
             <Route path="/" element={<Layout children={<Feed />} />} />
             <Route
-              path="/profile"
+              path="/profile/:user_id"
               element={<Layout children={<Profile />} />}
             />
             <Route

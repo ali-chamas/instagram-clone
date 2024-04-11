@@ -21,19 +21,28 @@ const Sidebar = () => {
       <div className="flex column gap">
         <img className="logo" src={feedLogo} alt="" />
         <div className="flex column">
-          <h3 className="w-full p flex align-center gap">
+          <h3
+            className="w-full p flex align-center gap"
+            onClick={() => navigate("/")}
+          >
             <span className="large-font">
               <IoMdHome />
             </span>{" "}
             Home
           </h3>
-          <h3 className="w-full p flex align-center gap">
+          <h3
+            className="w-full p flex align-center gap"
+            onClick={() => navigate("/followings")}
+          >
             <span className="large-font">
               <IoPeopleSharp />
             </span>{" "}
             Followings
           </h3>
-          <h3 className="w-full p flex align-center gap">
+          <h3
+            className="w-full p flex align-center gap"
+            onClick={() => navigate(`/profile/${user.id}`)}
+          >
             {user ? (
               <img
                 className="profile"

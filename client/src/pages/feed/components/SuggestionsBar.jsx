@@ -13,6 +13,8 @@ const SuggestionsBar = () => {
   const fetchSuggestions = async () => {
     const res = await sendRequest("GET", "/get-recommendations");
     const data = res.data;
+    console.log(res);
+
     setSuggestions(data.recommendations);
   };
 
@@ -20,7 +22,6 @@ const SuggestionsBar = () => {
     fetchSuggestions();
   }, [trigger]);
 
-  console.log(suggestions);
   return (
     <div className="suggestion flex column big-gap">
       <div className="w-full flex justify-between">
@@ -30,15 +31,16 @@ const SuggestionsBar = () => {
         </b>
       </div>
       <div className="flex column gap">
-        {suggestions.length > 0 &&
-          suggestions.map((sug, i) => (
-            <FollowUserCard
-              key={i}
-              user={sug.following}
-              res={sug}
-              setTrigger={setTrigger}
-            />
-          ))}
+        {suggestions.length > 0
+          ? suggestions.map((sug, i) => (
+              <FollowUserCard
+                key={i}
+                user={sug}
+                res={sug}
+                setTrigger={setTrigger}
+              />
+            ))
+          : "Follow users to get suggestions"}
       </div>
     </div>
   );

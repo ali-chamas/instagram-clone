@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follower;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,50 +59,53 @@ class FollowController extends Controller
         return response()->json(['success'=>"success",'requests'=>$request]);
     }
 
-    public function getFollowRecommendations(){
-        
-        $user=Auth::user();
-        $recommendations=null;
-
-        $followers = Follower::where('follower_id',$user->id)->where('isAccepted',true)->get();
-
-
-        $random_number=null;
-        $previous_number=null;
-
-        foreach($followers as $index => $follower){
-
-            
-  
-            if($index <2){
-                if(count($followers) ==1){
-                    $random_number=1;
-                }else{
-
-                    $random_number=mt_rand(0,count($followers)-1);
-                }
-
-                if($random_number == $previous_number){
-                    $index-=1;
-                    break;
-                    
-                }else{
-                    $previous_number=$random_number;
-                    $recommendations=Follower::where('follower_id',$followers[$random_number-1]->following_id)->where('isAccepted',true)->with('following')->get();
-                }
+    public function getFollowRecommendations()
+    {
+        $user = Auth::user();
+        $recommendations = null;
+    
+        // Get all followers of the authenticated user who have accepted the request
+        $followers = Follower::where('follower_id', $user->id)
+            ->where('isAccepted', true)
+            ->pluck('following_id') // Pluck only the following_id from the followers
+            ->toArray(); // Convert the plucked data to an array
+    
+        // Check if the user has any followers
+        if (empty($followers)) {
+            $message = "Follow users to get recommendations";
+        } else {
+            // Get up to 2 random followers who are not followed back by the authenticated user
+            $randomFollowers = Follower::whereNotIn('follower_id', $followers)
+                ->where('following_id', '!=', $user->id) // Exclude the authenticated user
+                ->where('isAccepted', true)
+                ->inRandomOrder()
+                ->take(2)
+                ->get();
+    
+            // Check if there are any recommendations
+            if ($randomFollowers->isNotEmpty()) {
+                // Get the following IDs of the random followers
+                $followingIds = $randomFollowers->pluck('following_id')->toArray();
+    
+                // Get the followings of the random followers
+                $recommendations = Follower::whereIn('follower_id', $followingIds)
+                    ->where('isAccepted', true)
+                    ->with('following')
+                    ->get()
+                    ->pluck('following')
+                    ->unique('id'); // Ensure uniqueness based on user ID
+    
+                // Exclude the authenticated user from the recommendations
+                $recommendations = $recommendations->where('id', '!=', $user->id);
+            } else {
+                return response()->json(['success' => false, 'message' =>'no followers found' ]);
             }
-                
         }
-        if($recommendations){
-            $message=$recommendations;
-        }else{
-            $message="Follow users to get recommendations";
-        }
-
-
-        return response()->json(['success'=> 'success','recommendations'=>$message]);
-        
+    
+        return response()->json(['success' => true, 'recommendations' => $recommendations]);
     }
+
+
 
 
     
