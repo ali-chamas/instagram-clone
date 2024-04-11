@@ -57,6 +57,7 @@ Route::controller(UsersController::class)->group(function () {
 Route::controller(FollowController::class)->group(function () {
     Route::post('send-request','sendFollowRequest');
     Route::get('accept-request/{req_id}','acceptFollowRequest');
+    Route::delete('reject-request/{req_id}','rejectFollowRequest');
     Route::delete('cancel-follow/{req_id}','cancelFollow');
     Route::get('get-follow','getFollow');
     Route::get('get-requests','getFollowRequests');

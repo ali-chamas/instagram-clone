@@ -29,6 +29,10 @@ class FollowController extends Controller
         $follow->save();
         return response()->json(['status'=>'success','message'=>'request accepted']);
     }
+    public function rejectFollowRequest($req_id){
+        $follow=Follower::find($req_id)->delete();
+        return response()->json(['status'=>'success','message'=>'request rejected']);
+    }
     public function cancelFollow($req_id){
         $user = Auth::user();
         $follow = Follower::where('follower_id',$user->id)->where('following_id',$req_id)->delete();

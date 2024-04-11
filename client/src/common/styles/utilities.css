@@ -88,6 +88,9 @@
 .p {
   padding: 20px;
 }
+.h-max {
+  height: 100%;
+}
 
 .btn-p {
   padding: 15px;
